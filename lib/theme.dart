@@ -6,7 +6,7 @@ abstract class AppPalette {
   static const lightPurple = Color(0xFFEEDCFF);
   static const topicPurple = Color(0xFFF3EDF7);
   static const darkPurple = Color(0xFF2A0054);
-  static const neutralPurpler = Color(0xFFE6E0E9); //used for opp party chat bubbles
+  static const neutralPurple = Color(0xFFE6E0E9); //used for opp party chat bubbles
 
   // Yellow
   static const intenseYellow = Color(0xFFFFDF9C);

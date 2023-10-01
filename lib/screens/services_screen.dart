@@ -57,7 +57,7 @@ class _ProfileInformation extends StatelessWidget {
         CircleAvatar(
           radius: 50,
           backgroundColor: Colors.white,
-          backgroundImage: AssetImage(user.imagePath),
+          backgroundImage: AssetImage(user.profilePicPath),
         ),
         const SizedBox(height: 20),
         Padding(
@@ -65,21 +65,15 @@ class _ProfileInformation extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildUserInfo(
-                context,
-                'Following',
-                '${user.followings}',
-              ),
-              _buildUserInfo(
-                context,
-                'Followers',
-                '${user.followers}',
-              ),
-              _buildUserInfo(
-                context,
-                'Likes',
-                '${user.likes}',
-              ),
+              // _buildUserInfo(
+              //   context,
+              // ),
+              // _buildUserInfo(
+              //   context,
+              // ),
+              // _buildUserInfo(
+              //   context,
+              // ),
             ],
           ),
         ),
