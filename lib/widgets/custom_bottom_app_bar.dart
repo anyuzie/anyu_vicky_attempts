@@ -10,7 +10,7 @@ class CustomBottomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      backgroundColor: AppPalette.backgroundColor,
+      backgroundColor: AppPalette.topicPurple,
       selectedItemColor: AppPalette.darkPurple,
       unselectedItemColor: AppPalette.darkPurple.withOpacity(0.5),
       selectedFontSize: 14,
@@ -32,11 +32,11 @@ class CustomBottomAppBar extends StatelessWidget {
           label: 'Home', // Label for the Home tab
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.search),
+          icon: Icon(Icons.collections_bookmark),
           label: 'Resources', // Label for the Resource tab
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
+          icon: Icon(Icons.diversity_1),
           label: 'Services', // Label for the Services tab
         ),
       ],

@@ -48,6 +48,7 @@ class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           _buildButton(context, 'Guides'),
+          const SizedBox(width: 20.0),
           _buildButton(context, 'Workshops'),
         ],
       ),
