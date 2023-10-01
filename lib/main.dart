@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         HomeScreen.routeName: (context) => const HomeScreen(),
-        ProfileScreen.routeName: (context) => const ProfileScreen(),
-        SearchScreen.routeName: (context) => const SearchScreen(),
+        ResourcesScreen.routeName: (context) => const ResourcesScreen(),
+        ServicesScreen.routeName: (context) => const ServicesScreen(),
       },
     );
   }

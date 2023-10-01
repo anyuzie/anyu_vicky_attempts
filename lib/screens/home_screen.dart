@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../models/models.dart';
 import '../widgets/widgets.dart';
 
@@ -44,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class _CustomAppBar extends StatelessWidget with PreferredSizeWidget {
+class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const _CustomAppBar({
     Key? key,
   }) : super(key: key);

@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import '../models/models.dart';
 import '../widgets/custom_video_player_preview.dart';
 
-class ProfileScreen extends StatelessWidget {
-  static const routeName = '/profile';
+class ServicesScreen extends StatelessWidget {
+  static const routeName = '/resources';
 
-  const ProfileScreen({
+  const ServicesScreen({
     Key? key,
   }) : super(key: key);
 

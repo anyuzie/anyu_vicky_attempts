@@ -128,7 +128,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
       onTap: () {
         Navigator.pushNamed(
           context,
-          ProfileScreen.routeName,
+          ServicesScreen.routeName,
           arguments: widget.post.user,
         );
       },
