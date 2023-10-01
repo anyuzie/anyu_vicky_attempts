@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_social_media_ui/theme.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-
 import '../models/models.dart';
 import '../widgets/widgets.dart';
 
@@ -15,18 +15,7 @@ class ResourcesScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        title: Text(
-          'Discover',
-          style: Theme.of(context)
-              .textTheme
-              .titleLarge!
-              .copyWith(color: Colors.white),
-        ),
-      ),
+      appBar: const _CustomAppBar(),
       bottomNavigationBar: const CustomBottomAppBar(),
       body: MasonryGridView.count(
         shrinkWrap: true,
@@ -42,6 +31,50 @@ class ResourcesScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const _CustomAppBar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      backgroundColor: AppPalette.backgroundColor,
+      elevation: 0,
+      centerTitle: true,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _buildButton(context, 'Guides'),
+          _buildButton(context, 'Workshops'),
+        ],
+      ),
+    );
+  }
+
+  TextButton _buildButton(
+    BuildContext context,
+    String text,
+  ) {
+    return TextButton(
+      onPressed: () {},
+      style: TextButton.styleFrom(
+        fixedSize: const Size(100, 50),
+      ),
+      child: Text(
+        text,
+        style: Theme.of(context).textTheme.titleMedium!.copyWith(
+              fontWeight: FontWeight.bold,
+              color: AppPalette.darkPurple,
+            ),
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(56.0);
 }
 
 class _UserCard extends StatelessWidget {
