@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
 import '../models/models.dart';
 import '../widgets/custom_video_player_preview.dart';
 
 class ServicesScreen extends StatelessWidget {
-  static const routeName = '/resources';
+  static const routeName = '/services';
 
   const ServicesScreen({
     Key? key,

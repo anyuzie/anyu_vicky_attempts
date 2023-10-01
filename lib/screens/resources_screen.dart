@@ -5,7 +5,7 @@ import '../models/models.dart';
 import '../widgets/widgets.dart';
 
 class ResourcesScreen extends StatelessWidget {
-  static const routeName = '/search';
+  static const routeName = '/resources';
 
   const ResourcesScreen({Key? key}) : super(key: key);
 
