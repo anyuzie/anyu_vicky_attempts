@@ -32,11 +32,11 @@ class CustomBottomAppBar extends StatelessWidget {
           label: 'Home', // Label for the Home tab
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.search),
+          icon: Icon(Icons.collections_bookmark),
           label: 'Resources', // Label for the Resource tab
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
+          icon: Icon(Icons.diversity_1),
           label: 'Services', // Label for the Services tab
         ),
       ],
