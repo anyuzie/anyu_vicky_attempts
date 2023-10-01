@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'screens/screens.dart';
 
 void main() {
@@ -20,6 +19,8 @@ class MyApp extends StatelessWidget {
         HomeScreen.routeName: (context) => const HomeScreen(),
         ResourcesScreen.routeName: (context) => const ResourcesScreen(),
         ServicesScreen.routeName: (context) => const ServicesScreen(),
+        GuidesScreen.routeName: (context) => const GuidesScreen(),
+        WorkshopsScreen.routeName: (context) => const WorkshopsScreen(),
       },
     );
   }
