@@ -7,15 +7,29 @@ class CustomBottomAppBar extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  int _getCurrentIndex(BuildContext context) {
+    final currentRoute = ModalRoute.of(context)?.settings.name;
+    if (currentRoute == HomeScreen.routeName) {
+      return 0;
+    } else if (currentRoute == ResourcesScreen.routeName) {
+      return 1;
+    } else if (currentRoute == ServicesScreen.routeName) {
+      return 2;
+    }
+    return 0; // Default to 0 if the route is not recognized.
+  }
+
   @override
   Widget build(BuildContext context) {
+    final currentIndex = _getCurrentIndex(context);
+
     return BottomNavigationBar(
       backgroundColor: AppPalette.topicPurple,
       selectedItemColor: AppPalette.darkPurple,
       unselectedItemColor: AppPalette.darkPurple.withOpacity(0.5),
       selectedFontSize: 14,
       unselectedFontSize: 12,
-      currentIndex: 0, // Set the index of the selected tab
+      currentIndex: currentIndex,
       onTap: (index) {
         // Handle navigation when a tab is tapped
         if (index == 0) {
@@ -26,18 +40,18 @@ class CustomBottomAppBar extends StatelessWidget {
           Navigator.pushNamed(context, ServicesScreen.routeName);
         }
       },
-      items: [
+      items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          label: 'Home', // Label for the Home tab
+          label: 'Home',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.collections_bookmark),
-          label: 'Resources', // Label for the Resource tab
+          label: 'Resources',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.diversity_1),
-          label: 'Services', // Label for the Services tab
+          label: 'Services',
         ),
       ],
     );
