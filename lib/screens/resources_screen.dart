@@ -94,7 +94,7 @@ class _UserCard extends StatelessWidget {
           height: isFirstCard ? 250 : 300,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(user.imagePath),
+              image: AssetImage(user.profilePicPath),
               fit: BoxFit.cover,
             ),
           ),
@@ -116,7 +116,7 @@ class _UserCard extends StatelessWidget {
           bottom: 10,
           child: Row(
             children: [
-              CircleAvatar(backgroundImage: AssetImage(user.imagePath)),
+              CircleAvatar(backgroundImage: AssetImage(user.profilePicPath)),
               const SizedBox(width: 10),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
