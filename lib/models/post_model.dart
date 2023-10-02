@@ -1,5 +1,4 @@
 // post_model.dart
-
 import 'package:flutter/material.dart';
 import 'package:flutter_social_media_ui/theme.dart';
 
