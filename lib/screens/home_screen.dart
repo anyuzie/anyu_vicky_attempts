@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0), // Adjust horizontal padding
+          padding: const EdgeInsets.fromLTRB(10, 15, 10, 10), // Adjust horizontal padding
           child: TextFormField(
             decoration: InputDecoration(
               hintText: 'Search',
