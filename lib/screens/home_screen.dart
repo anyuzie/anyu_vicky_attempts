@@ -42,18 +42,27 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(20.0),
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 0), // Add spacing below the app bar
-            ],
-          ),
-          for (var post in Post.posts)
-            PostWidget(username: post.username, title: post.title, caption: post.caption, avatarImagePath: post.avatarImagePath, tags: post.tags,)
-        ],
+      body: ListView.builder(
+        padding: const EdgeInsets.fromLTRB(0, 5.0, 5.0, 0),
+        itemCount: Post.posts.length,
+        itemBuilder: (BuildContext context, int index) {
+          var post = Post.posts[index];
+          return Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: AppPalette.lightPurple), // Optional border styling
+              borderRadius: BorderRadius.all(Radius.circular(10.0)), // Optional border radius
+            ),
+            margin: EdgeInsets.fromLTRB(0, 10.0, 10.0, 0), // Optional margin
+            child: Padding(padding: EdgeInsets.all(20.0),
+              child: PostWidget(
+                username: post.username,
+                title: post.title,
+                caption: post.caption,
+                avatarImagePath: post.avatarImagePath,
+                tags: post.tags,
+              ),
+          ));
+        },
       ),
     );
   }
