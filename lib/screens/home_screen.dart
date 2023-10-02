@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: ListView(
         padding: const EdgeInsets.all(20.0),
-        children: const [
+        children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
