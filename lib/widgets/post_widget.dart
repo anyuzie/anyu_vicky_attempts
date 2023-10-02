@@ -90,7 +90,30 @@ class PostWidget extends StatelessWidget {
             },
           ).toList(),
         ),
-        SizedBox(height: 20.0), // Add spacing between posts
+        Padding(padding: EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 2.0),
+        child: Row(
+          children: <Widget>[
+            Text(
+              '5 Likes 2 Comments',
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+            Spacer(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0), // Adjust the horizontal spacing
+              child: Icon(Icons.thumb_up_alt_outlined),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0), // Adjust the horizontal spacing
+              child: Icon(Icons.mode_comment_outlined),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0), // Adjust the horizontal spacing
+              child: Icon(Icons.ios_share),
+            ),
+          ],
+        ),
+        ),
+        SizedBox(height: 10.0), // Add spacing between posts
       ],
     );
   }
