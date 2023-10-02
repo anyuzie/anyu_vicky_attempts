@@ -1,150 +1,224 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_social_media_ui/theme.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import '../models/models.dart';
 import '../widgets/widgets.dart';
-import './screens.dart';
 
-class ResourcesScreen extends StatelessWidget {
+
+class ResourcesScreen extends StatefulWidget {
   static const routeName = '/resources';
 
-  const ResourcesScreen({Key? key}) : super(key: key);
+  ResourcesScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    List<User> users = User.users;
-
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: const _CustomAppBar(),
-      bottomNavigationBar: const CustomBottomAppBar(),
-      body: MasonryGridView.count(
-        shrinkWrap: true,
-        padding: const EdgeInsets.all(10.0),
-        itemCount: users.length,
-        crossAxisCount: 2,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        itemBuilder: (context, index) {
-          User user = users[index];
-          return _UserCard(user: user, isFirstCard: index == 0);
-        },
-      ),
-    );
-  }
+  _ResourcesScreenState createState() => _ResourcesScreenState();
 }
 
-class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const _CustomAppBar({
-    Key? key,
-  }) : super(key: key);
+class _ResourcesScreenState extends State<ResourcesScreen> {
+  Color primaryColor = AppPalette.primaryPurple; // Define PrimaryColor here
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: AppPalette.backgroundColor,
-      elevation: 0,
-      centerTitle: true,
-      title: DefaultTabController(
-        length: 2,
-        initialIndex: 0,
-        child: Column(
-          children: [
-            TabBar(
-              tabs: const [
-                Tab(text: 'Guides'),
-                Tab(text: 'Workshops'),
-              ],
-              indicatorColor: AppPalette.darkPurple,
-              labelColor: AppPalette.darkPurple,
-              unselectedLabelColor: AppPalette.darkPurple.withOpacity(0.5),
-              onTap: (index) {
-                if (index == 0) {
-                  Navigator.of(context).pushNamed(GuidesScreen.routeName);
-                } else if (index == 1) {
-                  Navigator.of(context).pushNamed(WorkshopsScreen.routeName);
-                }
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(56.0);
-}
-
-class _UserCard extends StatelessWidget {
-  const _UserCard({
-    Key? key,
-    required this.user,
-    required this.isFirstCard,
-  }) : super(key: key);
-
-  final User user;
-  final bool isFirstCard;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          height: isFirstCard ? 250 : 300,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(user.profilePicPath),
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        const Positioned.fill(
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.transparent, Colors.black],
-                begin: Alignment.center,
-                end: Alignment.bottomCenter,
-                stops: [0.4, 1.0],
+    return DefaultTabController(
+      length: 5,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: Expanded(
+              child: TabBarView(
+                children: <Widget>[
+                  GuidesTopBar(),
+                  WorkshopsTopBar(),
+                ],
               ),
             ),
-          ),
-        ),
-        Positioned(
-          left: 10,
-          bottom: 10,
-          child: Row(
-            children: [
-              CircleAvatar(backgroundImage: AssetImage(user.profilePicPath)),
-              const SizedBox(width: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    user.username,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+          bottom: TabBar(
+            indicatorColor: AppPalette.primaryPurple,
+            indicatorWeight: 6.0,
+            onTap: (index) {
+              setState(() {
+                switch (index) {
+                  case 0:
+                    primaryColor = AppPalette.primaryPurple;
+                    break;
+                  case 1:
+                    primaryColor = AppPalette.primaryPurple;
+                    break;
+                  default:
+                }
+              });
+            },
+            tabs: <Widget>[
+              Tab(
+                child: Container(
+                  child: Text(
+                    'Guides',
+                    style: TextStyle(color: Colors.black87, fontSize: 18.0),
                   ),
-                  const SizedBox(height: 5),
-                  Text(
-                    '2 min ago',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
-                        .copyWith(color: Colors.white),
+                ),
+              ),
+              Tab(
+                child: Container(
+                  child: Text(
+                    'Workshops',
+                    style: TextStyle(color: Colors.black87, fontSize: 18.0),
                   ),
-                ],
+                ),
               ),
             ],
           ),
         ),
-      ],
+        body: Column(
+          children: [
+            const Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: CustomSearchBar(),
+              ), // Add this line
+            Expanded(
+              child: TabBarView(
+                children: <Widget>[
+                  GuidesTopBar(),
+                  WorkshopsTopBar(),
+                ],
+              ),
+            ),
+          ],
+        ),
+        bottomNavigationBar: const CustomBottomAppBar(),
+      ),
     );
-  }
 }
+}
+
+//     return Scaffold(
+//       backgroundColor: AppPalette.backgroundColor,
+//       appBar: const _CustomAppBar(),
+//       bottomNavigationBar: const CustomBottomAppBar(),
+//       body: MasonryGridView.count(
+//         shrinkWrap: true,
+//         padding: const EdgeInsets.all(10.0),
+//         itemCount: users.length,
+//         crossAxisCount: 2,
+//         mainAxisSpacing: 10,
+//         crossAxisSpacing: 10,
+//         itemBuilder: (context, index) {
+//           User user = users[index];
+//           return _UserCard(user: user, isFirstCard: index == 0);
+//         },
+//       ),
+//     );
+//   }
+// }
+
+// class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+//   const _CustomAppBar({
+//     Key? key,
+//   }) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return AppBar(
+//       backgroundColor: AppPalette.backgroundColor,
+//       elevation: 0,
+//       centerTitle: true,
+//       title: DefaultTabController(
+//         length: 2,
+//         initialIndex: 0,
+//         child: Column(
+//           children: [
+//             TabBar(
+//               tabs: const [
+//                 Tab(text: 'Guides'),
+//                 Tab(text: 'Workshops'),
+//               ],
+//               indicatorColor: AppPalette.darkPurple,
+//               labelColor: AppPalette.darkPurple,
+//               unselectedLabelColor: AppPalette.darkPurple.withOpacity(0.5),
+//               onTap: (index) {
+//                 if (index == 0) {
+//                   Navigator.of(context).pushNamed(GuidesScreen.routeName);
+//                 } else if (index == 1) {
+//                   Navigator.of(context).pushNamed(WorkshopsScreen.routeName);
+//                 }
+//               },
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+
+//   @override
+//   Size get preferredSize => const Size.fromHeight(56.0);
+// }
+
+// class _UserCard extends StatelessWidget {
+//   const _UserCard({
+//     Key? key,
+//     required this.user,
+//     required this.isFirstCard,
+//   }) : super(key: key);
+
+//   final User user;
+//   final bool isFirstCard;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Stack(
+//       children: [
+//         Container(
+//           height: isFirstCard ? 250 : 300,
+//           decoration: BoxDecoration(
+//             image: DecorationImage(
+//               image: AssetImage(user.profilePicPath),
+//               fit: BoxFit.cover,
+//             ),
+//           ),
+//         ),
+//         const Positioned.fill(
+//           child: DecoratedBox(
+//             decoration: BoxDecoration(
+//               gradient: LinearGradient(
+//                 colors: [Colors.transparent, Colors.black],
+//                 begin: Alignment.center,
+//                 end: Alignment.bottomCenter,
+//                 stops: [0.4, 1.0],
+//               ),
+//             ),
+//           ),
+//         ),
+//         Positioned(
+//           left: 10,
+//           bottom: 10,
+//           child: Row(
+//             children: [
+//               CircleAvatar(backgroundImage: AssetImage(user.profilePicPath)),
+//               const SizedBox(width: 10),
+//               Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: [
+//                   Text(
+//                     user.username,
+//                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+//                           fontWeight: FontWeight.bold,
+//                           color: Colors.white,
+//                         ),
+//                   ),
+//                   const SizedBox(height: 5),
+//                   Text(
+//                     '2 min ago',
+//                     style: Theme.of(context)
+//                         .textTheme
+//                         .bodySmall!
+//                         .copyWith(color: Colors.white),
+//                   ),
+//                 ],
+//               ),
+//             ],
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
 
 
 // import 'package:flutter/material.dart';

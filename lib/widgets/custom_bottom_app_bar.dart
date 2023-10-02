@@ -25,8 +25,8 @@ class CustomBottomAppBar extends StatelessWidget {
 
     return BottomNavigationBar(
       backgroundColor: AppPalette.topicPurple,
-      selectedItemColor: AppPalette.darkPurple,
-      unselectedItemColor: AppPalette.darkPurple.withOpacity(0.5),
+      selectedItemColor: AppPalette.primaryPurple,
+      unselectedItemColor: AppPalette.primaryPurple.withOpacity(0.5),
       selectedFontSize: 14,
       unselectedFontSize: 12,
       currentIndex: currentIndex,
