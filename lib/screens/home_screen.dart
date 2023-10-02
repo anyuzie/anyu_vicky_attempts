@@ -48,58 +48,124 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const SizedBox(height: 20.0), // Add spacing between search bar and posts
-              Row(
-                children: <Widget>[
-  // User Image (on the left) with padding
-              Padding(
-                padding: EdgeInsets.only(right: 8.0), // Adjust the padding as needed
-                child: CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/avatars/30.png'),
-                  radius: 20.0, // Adjust the radius as needed
-                ),
-              ),
-
-              // Title, Username, and Caption (in a column)
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    // Username
-                    Text(
-                      "handymandy",
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-
-                    // Title
-                    Text(
-                      "First time caregiver tips",
-                      style: TextStyle(fontSize: 24.0),
-                    ),
-
-                    // Caption
-                    Text(
-                    "I’m overwhelmed because I feel like I’m doing everything wrong. My main priority is to make sure my mother is totally comfortable and pain-free while she is in her transition phase. I feel guilty when she’s sleeping comfortably and I have to move her to get her cleaned up or shift her position to prevent sores, and she weeps in pain. It’s the toughest part about all this. I love caring for her because I love her, I’m so busy with things that I have become somewhat disassociated (I still cry but I know I haven’t processed things fully yet) and when all this is over, on top of all the other bad feelings, I deeply fear the guilt I’ll have for causing her that pain. I truly feel seeing her decline is traumatizing me. If anyone could offer some helpful tips, I would be very grateful.",
-                    style: TextStyle(
-                      fontSize: 14.0, // Adjust the font size as needed
-                      color: Colors.grey, // Adjust the color as needed
-                    ),
-                    maxLines: 3, // Set the maximum number of lines
-                    overflow: TextOverflow.ellipsis, // Add overflow ellipsis
-                  ),
-      ],
-    ),
-  ),
 ],
 
               ),
             ],
           ),
-        ],
-      )
-    );
+
+      );
   }
 }
 
+class _CategoryNews extends StatelessWidget {
+  const _CategoryNews({
+    Key? key,
+    required this.tabs,
+  }) : super(key: key);
+
+  final List<String> tabs;
+
+  @override
+  Widget build(BuildContext context) {
+    final articles = Article.articles;
+    return Column(
+      children: [
+        TabBar(
+          isScrollable: true,
+          indicatorColor: Colors.black,
+          tabs: tabs
+              .map(
+                (tab) => Tab(
+                  icon: Text(
+                    tab,
+                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                ),
+              )
+              .toList(),
+        ),
+        SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: TabBarView(
+            children: tabs
+                .map(
+                  (tab) => ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: articles.length,
+                    itemBuilder: ((context, index) {
+                      return InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            ArticleScreen.routeName,
+                            arguments: articles[index],
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            ImageContainer(
+                              width: 80,
+                              height: 80,
+                              margin: const EdgeInsets.all(10.0),
+                              borderRadius: 5,
+                              imageUrl: articles[index].imageUrl,
+                            ),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    articles[index].title,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.clip,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge!
+                                        .copyWith(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.schedule,
+                                        size: 18,
+                                      ),
+                                      const SizedBox(width: 5),
+                                      Text(
+                                        '${DateTime.now().difference(articles[index].createdAt).inHours} hours ago',
+                                        style: const TextStyle(fontSize: 12),
+                                      ),
+                                      const SizedBox(width: 20),
+                                      const Icon(
+                                        Icons.visibility,
+                                        size: 18,
+                                      ),
+                                      const SizedBox(width: 5),
+                                      Text(
+                                        '${articles[index].views} views',
+                                        style: const TextStyle(fontSize: 12),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }),
+                  ),
+                )
+                .toList(),
+          ),
+        )
+      ],
+    );
+  }
+}
