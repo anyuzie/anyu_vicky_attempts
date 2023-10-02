@@ -15,157 +15,46 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // List<Post> posts = Post.posts;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: const CustomBottomAppBar(),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        title: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0), // Adjust horizontal padding
+          child: TextFormField(
+            decoration: InputDecoration(
+              hintText: 'Search',
+              fillColor: AppPalette.topicPurple,
+              filled: true,
+              prefixIcon: const Icon(
+                Icons.search,
+                color: AppPalette.darkPurple,  
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20.0),
+                borderSide: BorderSide.none,
+              )
+            ),
+          ),
+        ),
       ),
-      bottomNavigationBar: const CustomBottomAppBar(),
       body: ListView(
         padding: const EdgeInsets.all(20.0),
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 5),
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: 'Search',
-                  fillColor: Colors.purple.shade200,
-                  filled: true,
-                  prefixIcon: const Icon(
-                    Icons.search,
-                    color: Colors.purple,  
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                    borderSide: BorderSide.none,
-                  )
-                ),
-              ),
-              const SizedBox(height: 20.0), // Add spacing between search bar and posts
-],
-
-              ),
+              const SizedBox(height: 0), // Add spacing below the app bar
             ],
           ),
-
-      );
-  }
-}
-
-class _CategoryNews extends StatelessWidget {
-  const _CategoryNews({
-    Key? key,
-    required this.tabs,
-  }) : super(key: key);
-
-  final List<String> tabs;
-
-  @override
-  Widget build(BuildContext context) {
-    final articles = Article.articles;
-    return Column(
-      children: [
-        TabBar(
-          isScrollable: true,
-          indicatorColor: Colors.black,
-          tabs: tabs
-              .map(
-                (tab) => Tab(
-                  icon: Text(
-                    tab,
-                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                ),
-              )
-              .toList(),
-        ),
-        SizedBox(
-          height: MediaQuery.of(context).size.height,
-          child: TabBarView(
-            children: tabs
-                .map(
-                  (tab) => ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: articles.length,
-                    itemBuilder: ((context, index) {
-                      return InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            ArticleScreen.routeName,
-                            arguments: articles[index],
-                          );
-                        },
-                        child: Row(
-                          children: [
-                            ImageContainer(
-                              width: 80,
-                              height: 80,
-                              margin: const EdgeInsets.all(10.0),
-                              borderRadius: 5,
-                              imageUrl: articles[index].imageUrl,
-                            ),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    articles[index].title,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.clip,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge!
-                                        .copyWith(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      const Icon(
-                                        Icons.schedule,
-                                        size: 18,
-                                      ),
-                                      const SizedBox(width: 5),
-                                      Text(
-                                        '${DateTime.now().difference(articles[index].createdAt).inHours} hours ago',
-                                        style: const TextStyle(fontSize: 12),
-                                      ),
-                                      const SizedBox(width: 20),
-                                      const Icon(
-                                        Icons.visibility,
-                                        size: 18,
-                                      ),
-                                      const SizedBox(width: 5),
-                                      Text(
-                                        '${articles[index].views} views',
-                                        style: const TextStyle(fontSize: 12),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    }),
-                  ),
-                )
-                .toList(),
-          ),
-        )
-      ],
+          for (var post in Post.posts)
+            PostWidget(username: post.username, title: post.title, caption: post.caption, avatarImagePath: post.avatarImagePath, tags: post.tags,)
+        ],
+      ),
     );
   }
 }

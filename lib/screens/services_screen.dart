@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../models/models.dart';
-import '../widgets/custom_video_player_preview.dart';
 
 class ServicesScreen extends StatelessWidget {
   static const routeName = '/services';
@@ -13,9 +12,6 @@ class ServicesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     User? user = ModalRoute.of(context)!.settings.arguments as User?;
     user = user ??= User.users[0];
-    List<Post> posts = Post.posts.where((post) {
-      return post.user.id == user!.id;
-    }).toList();
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -31,12 +27,7 @@ class ServicesScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _ProfileInformation(user: user),
-            _ProfileContent(posts: posts),
-          ],
-        ),
+        
       ),
     );
   }
@@ -175,20 +166,6 @@ class _ProfileContent extends StatelessWidget {
             child: TabBarView(
               physics: const NeverScrollableScrollPhysics(),
               children: [
-                // First tab
-                GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: posts.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    childAspectRatio: 9 / 16,
-                  ),
-                  itemBuilder: (context, index) {
-                    return CustomVideoPlayerPreview(
-                      post: posts[index],
-                    );
-                  },
-                ),
                 // Second tab
                 const Icon(
                   Icons.favorite,
