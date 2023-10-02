@@ -27,27 +27,13 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: const CustomBottomAppBar(),
       body: ListView(
         padding: const EdgeInsets.all(20.0),
-        children: [
+        children: const [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 5),
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: 'Search',
-                  fillColor: Colors.purple.shade200,
-                  filled: true,
-                  prefixIcon: const Icon(
-                    Icons.search,
-                    color: Colors.purple,  
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                    borderSide: BorderSide.none,
-                  )
-                ),
-              ),
-              const SizedBox(height: 20.0), // Add spacing between search bar and posts
+              SizedBox(height: 5),
+              CustomSearchBar(),
+              SizedBox(height: 20.0), // Add spacing between search bar and posts
               Row(
                 children: <Widget>[
   // User Image (on the left) with padding
@@ -102,4 +88,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
