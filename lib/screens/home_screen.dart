@@ -15,76 +15,46 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // List<Post> posts = Post.posts;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: const CustomBottomAppBar(),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        title: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0), // Adjust horizontal padding
+          child: TextFormField(
+            decoration: InputDecoration(
+              hintText: 'Search',
+              fillColor: AppPalette.topicPurple,
+              filled: true,
+              prefixIcon: const Icon(
+                Icons.search,
+                color: AppPalette.darkPurple,  
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20.0),
+                borderSide: BorderSide.none,
+              )
+            ),
+          ),
+        ),
       ),
-      bottomNavigationBar: const CustomBottomAppBar(),
       body: ListView(
         padding: const EdgeInsets.all(20.0),
         children: const [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 5),
-              CustomSearchBar(),
-              SizedBox(height: 20.0), // Add spacing between search bar and posts
-              Row(
-                children: <Widget>[
-  // User Image (on the left) with padding
-              Padding(
-                padding: EdgeInsets.only(right: 8.0), // Adjust the padding as needed
-                child: CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/avatars/30.png'),
-                  radius: 20.0, // Adjust the radius as needed
-                ),
-              ),
-
-              // Title, Username, and Caption (in a column)
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    // Username
-                    Text(
-                      "handymandy",
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-
-                    // Title
-                    Text(
-                      "First time caregiver tips",
-                      style: TextStyle(fontSize: 24.0),
-                    ),
-
-                    // Caption
-                    Text(
-                    "I’m overwhelmed because I feel like I’m doing everything wrong. My main priority is to make sure my mother is totally comfortable and pain-free while she is in her transition phase. I feel guilty when she’s sleeping comfortably and I have to move her to get her cleaned up or shift her position to prevent sores, and she weeps in pain. It’s the toughest part about all this. I love caring for her because I love her, I’m so busy with things that I have become somewhat disassociated (I still cry but I know I haven’t processed things fully yet) and when all this is over, on top of all the other bad feelings, I deeply fear the guilt I’ll have for causing her that pain. I truly feel seeing her decline is traumatizing me. If anyone could offer some helpful tips, I would be very grateful.",
-                    style: TextStyle(
-                      fontSize: 14.0, // Adjust the font size as needed
-                      color: Colors.grey, // Adjust the color as needed
-                    ),
-                    maxLines: 3, // Set the maximum number of lines
-                    overflow: TextOverflow.ellipsis, // Add overflow ellipsis
-                  ),
-      ],
-    ),
-  ),
-],
-
-              ),
+              const SizedBox(height: 0), // Add spacing below the app bar
             ],
           ),
+          for (var post in Post.posts)
+            PostWidget(username: post.username, title: post.title, caption: post.caption, avatarImagePath: post.avatarImagePath, tags: post.tags,)
         ],
-      )
+      ),
     );
   }
 }

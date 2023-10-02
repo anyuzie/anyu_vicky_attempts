@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/models.dart';
 
-
 class ServicesScreen extends StatelessWidget {
   static const routeName = '/services';
 

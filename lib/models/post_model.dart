@@ -1,102 +1,153 @@
-import 'user_model.dart';
+// post_model.dart
 
-enum PostType { image, video, audio }
+import 'package:flutter/material.dart';
+import 'package:flutter_social_media_ui/theme.dart';
 
 class Post {
-  final String id;
-  final User user;
-  final PostType type;
+  final String username;
+  final String title;
   final String caption;
-  final String assetPath;
+  final String avatarImagePath;
+  final List<Widget> tags;
 
-  const Post({
-    required this.id,
-    required this.user,
-    required this.type,
+  Post({
+    required this.username,
+    required this.title,
     required this.caption,
-    required this.assetPath,
+    required this.avatarImagePath,
+    required this.tags,
   });
 
-  static List<Post> posts = [
+  // Define a static list of posts
+  static final List<Post> posts = [
     Post(
-      id: '1',
-      user: User.users[0],
-      type: PostType.video,
-      caption:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dui dolor, pulvinar ut odio a, facilisis dignissim risus.',
-      assetPath: 'assets/videos/video_1.mp4',
+      username: 'handymandy',
+      title: 'First time caregiver tips',
+      avatarImagePath: 'assets/images/avatars/30.png',
+      caption: "I’m overwhelmed because I feel like I’m doing everything wrong. My main priority is to make sure my mother is totally comfortable and pain free while she is in her transition phase. I feel guilty when she’s sleeping comfortably and I have to move her to get her cleaned up or shift her position to prevent sores and she weeps in pain. It’s the toughest part about all this. I love caring for her because I love her, I’m so busy with things that I have become somewhat disassociated (I still cry but I know I haven’t processed things fully yet) and when all this is over, on top of all the other bad feelings, I deeply fear the guilt I’ll have for causing her that pain. I truly feel seeing her decline is traumatizing me. If anyone could offer some helpful tips, I would be very grateful.",
+      tags: [
+        Text("Roles & responsibilities"),
+        Text("Stress & burnout"),
+        Text("Relationships"),
+        Text("Self-care"),
+      ],
     ),
     Post(
-      id: '2',
-      user: User.users[2],
-      type: PostType.video,
-      caption:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dui dolor, pulvinar ut odio a, facilisis dignissim risus.',
-      assetPath: 'assets/videos/video_2.mp4',
+      username: 'immaxis',
+      title: 'Need advice on dementia meds',
+      avatarImagePath: 'assets/images/avatars/29.png',
+      caption: "My mom is well into the later stages of Alzheimer's and can no longer do any self care. She is constantly anxious and fearful people Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+      tags: [
+        Text("Dementia"),
+        Text("Medication"),
+      ],
     ),
     Post(
-      id: '3',
-      user: User.users[1],
-      type: PostType.video,
-      caption:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dui dolor, pulvinar ut odio a, facilisis dignissim risus.',
-      assetPath: 'assets/videos/video_3.mp4',
+      username: 'solarm',
+      title: 'Breaking sad news to mother with Dementia',
+      avatarImagePath: 'assets/images/avatars/28.png',
+      caption: "Hello everyone. Has anyone had heartbreaking news they've had to break to someone? Trying to figure out if I should just lie, or who",
+      tags: [
+        Text("Dementia"),
+        Text("Relationships"),
+      ],
     ),
     Post(
-      id: '4',
-      user: User.users[0],
-      type: PostType.video,
-      caption:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dui dolor, pulvinar ut odio a, facilisis dignissim risus.',
-      assetPath: 'assets/videos/video_4.mp4',
+      username: 'handymandy',
+      title: 'First time caregiver tips',
+      avatarImagePath: 'assets/images/avatars/30.png',
+      caption: "I’m overwhelmed because I feel like I’m doing everything wrong. My main priority is to make sure my mother is totally comfortable and pain free while she is in her transition phase. I feel guilty when she’s sleeping comfortably and I have to move her to get her cleaned up or shift her position to prevent sores and she weeps in pain. It’s the toughest part about all this. I love caring for her because I love her, I’m so busy with things that I have become somewhat disassociated (I still cry but I know I haven’t processed things fully yet) and when all this is over, on top of all the other bad feelings, I deeply fear the guilt I’ll have for causing her that pain. I truly feel seeing her decline is traumatizing me. If anyone could offer some helpful tips, I would be very grateful.",
+      tags: [
+        Text("Roles & responsibilities"),
+        Text("Stress & burnout"),
+        Text("Relationships"),
+        Text("Self-care"),
+      ],
     ),
     Post(
-      id: '5',
-      user: User.users[3],
-      type: PostType.video,
-      caption:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dui dolor, pulvinar ut odio a, facilisis dignissim risus.',
-      assetPath: 'assets/videos/video_5.mp4',
+      username: 'immaxis',
+      title: 'Need advice on dementia meds',
+      avatarImagePath: 'assets/images/avatars/29.png',
+      caption: "My mom is well into the later stages of Alzheimer's and can no longer do any self care. She is constantly anxious and fearful people Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+      tags: [
+        Text("Dementia"),
+        Text("Medication"),
+      ],
     ),
     Post(
-      id: '6',
-      user: User.users[0],
-      type: PostType.video,
-      caption:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dui dolor, pulvinar ut odio a, facilisis dignissim risus.',
-      assetPath: 'assets/videos/video_6.mp4',
+      username: 'solarm',
+      title: 'Breaking sad news to mother with Dementia',
+      avatarImagePath: 'assets/images/avatars/28.png',
+      caption: "Hello everyone. Has anyone had heartbreaking news they've had to break to someone? Trying to figure out if I should just lie, or who",
+      tags: [
+        Text("Dementia"),
+        Text("Relationships"),
+      ],
     ),
     Post(
-      id: '7',
-      user: User.users[0],
-      type: PostType.video,
-      caption:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dui dolor, pulvinar ut odio a, facilisis dignissim risus.',
-      assetPath: 'assets/videos/video_7.mp4',
+      username: 'handymandy',
+      title: 'First time caregiver tips',
+      avatarImagePath: 'assets/images/avatars/30.png',
+      caption: "I’m overwhelmed because I feel like I’m doing everything wrong. My main priority is to make sure my mother is totally comfortable and pain free while she is in her transition phase. I feel guilty when she’s sleeping comfortably and I have to move her to get her cleaned up or shift her position to prevent sores and she weeps in pain. It’s the toughest part about all this. I love caring for her because I love her, I’m so busy with things that I have become somewhat disassociated (I still cry but I know I haven’t processed things fully yet) and when all this is over, on top of all the other bad feelings, I deeply fear the guilt I’ll have for causing her that pain. I truly feel seeing her decline is traumatizing me. If anyone could offer some helpful tips, I would be very grateful.",
+      tags: [
+        Text("Roles & responsibilities"),
+        Text("Stress & burnout"),
+        Text("Relationships"),
+        Text("Self-care"),
+      ],
     ),
     Post(
-      id: '8',
-      user: User.users[0],
-      type: PostType.video,
-      caption:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dui dolor, pulvinar ut odio a, facilisis dignissim risus.',
-      assetPath: 'assets/videos/video_8.mp4',
+      username: 'immaxis',
+      title: 'Need advice on dementia meds',
+      avatarImagePath: 'assets/images/avatars/29.png',
+      caption: "My mom is well into the later stages of Alzheimer's and can no longer do any self care. She is constantly anxious and fearful people Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+      tags: [
+        Text("Dementia"),
+        Text("Medication"),
+      ],
     ),
     Post(
-      id: '9',
-      user: User.users[3],
-      type: PostType.video,
-      caption:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dui dolor, pulvinar ut odio a, facilisis dignissim risus.',
-      assetPath: 'assets/videos/video_9.mp4',
+      username: 'solarm',
+      title: 'Breaking sad news to mother with Dementia',
+      avatarImagePath: 'assets/images/avatars/28.png',
+      caption: "Hello everyone. Has anyone had heartbreaking news they've had to break to someone? Trying to figure out if I should just lie, or who",
+      tags: [
+        Text("Dementia"),
+        Text("Relationships"),
+      ],
     ),
     Post(
-      id: '10',
-      user: User.users[1],
-      type: PostType.video,
-      caption:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dui dolor, pulvinar ut odio a, facilisis dignissim risus.',
-      assetPath: 'assets/videos/video_10.mp4',
+      username: 'handymandy',
+      title: 'First time caregiver tips',
+      avatarImagePath: 'assets/images/avatars/30.png',
+      caption: "I’m overwhelmed because I feel like I’m doing everything wrong. My main priority is to make sure my mother is totally comfortable and pain free while she is in her transition phase. I feel guilty when she’s sleeping comfortably and I have to move her to get her cleaned up or shift her position to prevent sores and she weeps in pain. It’s the toughest part about all this. I love caring for her because I love her, I’m so busy with things that I have become somewhat disassociated (I still cry but I know I haven’t processed things fully yet) and when all this is over, on top of all the other bad feelings, I deeply fear the guilt I’ll have for causing her that pain. I truly feel seeing her decline is traumatizing me. If anyone could offer some helpful tips, I would be very grateful.",
+      tags: [
+        Text("Roles & responsibilities"),
+        Text("Stress & burnout"),
+        Text("Relationships"),
+        Text("Self-care"),
+      ],
     ),
+    Post(
+      username: 'immaxis',
+      title: 'Need advice on dementia meds',
+      avatarImagePath: 'assets/images/avatars/29.png',
+      caption: "My mom is well into the later stages of Alzheimer's and can no longer do any self care. She is constantly anxious and fearful people Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+      tags: [
+        Text("Dementia"),
+        Text("Medication"),
+      ],
+    ),
+    Post(
+      username: 'solarm',
+      title: 'Breaking sad news to mother with Dementia',
+      avatarImagePath: 'assets/images/avatars/28.png',
+      caption: "Hello everyone. Has anyone had heartbreaking news they've had to break to someone? Trying to figure out if I should just lie, or who",
+      tags: [
+        Text("Dementia"),
+        Text("Relationships"),
+      ],
+    ),
+    // Add more posts as needed
   ];
 }
